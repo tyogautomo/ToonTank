@@ -2,6 +2,8 @@
 
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -34,8 +36,35 @@ void ABasePawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ABasePawn::RotateTurret(FVector LookAtTarget)
+{
+	const FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
+	FRotator LookAtRotation = ToTarget.Rotation();
+	LookAtRotation.Pitch = 0;
+	LookAtRotation.Roll = 0;
+
+	TurretMesh->SetWorldRotation(
+			FMath::RInterpTo(TurretMesh->GetComponentRotation(),
+											 LookAtRotation,
+											 GetWorld()->GetDeltaSeconds(),
+											 5));
+}
+
 // Called to bind functionality to input
 void ABasePawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void ABasePawn::Fire()
+{
+	FVector ProjectileSpawnPointLocation = ProjectileSpawnPoint->GetComponentLocation();
+	DrawDebugSphere(
+			GetWorld(),
+			ProjectileSpawnPointLocation,
+			20,
+			12,
+			FColor::Green,
+			false,
+			0.2);
 }
