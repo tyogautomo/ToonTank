@@ -15,6 +15,8 @@ AProjectile::AProjectile()
 	RootComponent = ProjectileMesh;
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
+	TrailParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Trail Particle"));
+
 	ProjectileMovementComponent->InitialSpeed = InitialSpeed;
 	ProjectileMovementComponent->MaxSpeed = MaxSpeed;
 }
@@ -56,6 +58,11 @@ void AProjectile::OnHit(
 				this,
 				DamageTypeClass);
 
+		UGameplayStatics::SpawnEmitterAtLocation(
+				GetWorld(),
+				HitParticle,
+				Hit.Location,
+				Hit.GetActor()->GetActorRotation());
 		Destroy();
 	}
 }

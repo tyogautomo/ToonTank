@@ -22,6 +22,8 @@ protected:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
 
+	void HandleDestruction();
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true));
 	class UCapsuleComponent *CapsuleComp;
@@ -38,7 +40,6 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileClass;
 
-	void HandleDestruction();
 
 public:
 	// Called every frame

@@ -23,7 +23,7 @@ void ATank::BeginPlay()
 {
   Super::BeginPlay();
 
-  PlayerControllerRef = Cast<APlayerController>(GetController());
+  TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 // Called every frame
@@ -34,28 +34,37 @@ void ATank::Tick(float DeltaTime)
   HandleAim();
 }
 
+void ATank::HandleDestruction()
+{
+  Super::HandleDestruction();
+
+  // specific for tank
+  SetActorHiddenInGame(true);
+  SetActorTickEnabled(false);
+}
+
 void ATank::HandleAim()
 {
-  if (PlayerControllerRef)
+  if (TankPlayerController)
   {
     FHitResult HitResult;
-    const bool HasHit = PlayerControllerRef->GetHitResultUnderCursor(
+    const bool HasHit = TankPlayerController->GetHitResultUnderCursor(
         ECollisionChannel::ECC_Visibility,
         false,
         HitResult);
     if (HasHit)
     {
       FVector HitPoint = HitResult.ImpactPoint;
-      DrawDebugSphere(
-          GetWorld(),
-          HitPoint,
-          20,
-          10,
-          FColor::Red,
-          false,
-          -1.f,
-          0U,
-          2);
+      // DrawDebugSphere(
+      //     GetWorld(),
+      //     HitPoint,
+      //     20,
+      //     10,
+      //     FColor::Red,
+      //     false,
+      //     -1.f,
+      //     0U,
+      //     2);
 
       RotateTurret(HitPoint);
     }

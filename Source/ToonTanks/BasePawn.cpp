@@ -80,5 +80,5 @@ void ABasePawn::Fire()
 
 void ABasePawn::HandleDestruction()
 {
-	//
+	// TODO: visual/sound effect
 }

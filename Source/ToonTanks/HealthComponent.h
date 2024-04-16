@@ -29,6 +29,8 @@ private:
 
 	float Health = 0.f;
 
+	class AToonTanksGameMode* ToonkTanksGameMode;
+
 	UFUNCTION()
 	void DamageTaken(
 			AActor *DamagedActor,

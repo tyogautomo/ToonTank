@@ -23,18 +23,18 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere)
+	float InitialSpeed = 1000;
+
+	UPROPERTY(EditAnywhere)
+	float MaxSpeed = 2000;
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UStaticMeshComponent *ProjectileMesh;
 
 	UPROPERTY(VisibleAnywhere)
 	class UProjectileMovementComponent *ProjectileMovementComponent;
-
-	UPROPERTY(EditAnywhere)
-	float InitialSpeed = 1000;
-
-	UPROPERTY(EditAnywhere)
-	float MaxSpeed = 2000;
 
 	UFUNCTION()
 	void OnHit(
@@ -46,4 +46,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float Damage = 50;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem *HitParticle;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystemComponent *TrailParticle;
 };
