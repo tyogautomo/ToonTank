@@ -6,6 +6,7 @@
 #include "DrawDebugHelpers.h"
 #include "Projectile.h"
 #include "Engine/World.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -67,18 +68,17 @@ void ABasePawn::Fire()
 																												 ProjectileSpawnPointLocation,
 																												 ProjectileSpawnPointRotation);
 	Projectile->SetOwner(this);
-
-	// DrawDebugSphere(
-	// 		GetWorld(),
-	// 		ProjectileSpawnPointLocation,
-	// 		20,
-	// 		12,
-	// 		FColor::Green,
-	// 		false,
-	// 		0.2);
 }
 
 void ABasePawn::HandleDestruction()
 {
 	// TODO: visual/sound effect
+	if (DeathParticle)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(
+				GetWorld(),
+				DeathParticle,
+				GetActorLocation(),
+				GetActorRotation());
+	}
 }
