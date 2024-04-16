@@ -40,6 +40,8 @@ private:
 
 	APlayerController *PlayerControllerRef;
 
+	void HandleAim();
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

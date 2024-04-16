@@ -31,6 +31,11 @@ void ATank::Tick(float DeltaTime)
 {
   Super::Tick(DeltaTime);
 
+  HandleAim();
+}
+
+void ATank::HandleAim()
+{
   if (PlayerControllerRef)
   {
     FHitResult HitResult;

@@ -4,6 +4,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "Projectile.h"
+#include "Engine/World.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -59,12 +61,24 @@ void ABasePawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 void ABasePawn::Fire()
 {
 	FVector ProjectileSpawnPointLocation = ProjectileSpawnPoint->GetComponentLocation();
-	DrawDebugSphere(
-			GetWorld(),
-			ProjectileSpawnPointLocation,
-			20,
-			12,
-			FColor::Green,
-			false,
-			0.2);
+	FRotator ProjectileSpawnPointRotation = ProjectileSpawnPoint->GetComponentRotation();
+
+	auto *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+																												 ProjectileSpawnPointLocation,
+																												 ProjectileSpawnPointRotation);
+	Projectile->SetOwner(this);
+
+	// DrawDebugSphere(
+	// 		GetWorld(),
+	// 		ProjectileSpawnPointLocation,
+	// 		20,
+	// 		12,
+	// 		FColor::Green,
+	// 		false,
+	// 		0.2);
+}
+
+void ABasePawn::HandleDestruction()
+{
+	//
 }

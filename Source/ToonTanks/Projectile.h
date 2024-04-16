@@ -26,4 +26,24 @@ public:
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UStaticMeshComponent *ProjectileMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	class UProjectileMovementComponent *ProjectileMovementComponent;
+
+	UPROPERTY(EditAnywhere)
+	float InitialSpeed = 1000;
+
+	UPROPERTY(EditAnywhere)
+	float MaxSpeed = 2000;
+
+	UFUNCTION()
+	void OnHit(
+			UPrimitiveComponent *HitComp,
+			AActor *OtherActor,
+			UPrimitiveComponent *OtherComp,
+			FVector NormalImpulse,
+			const FHitResult &Hit);
+
+	UPROPERTY(EditAnywhere)
+	float Damage = 50;
 };
