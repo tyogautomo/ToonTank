@@ -46,10 +46,10 @@ void UHealthComponent::DamageTaken(
 
 	Health -= Damage;
 
-	UE_LOG(LogTemp, Warning, TEXT("Damage Taken! Health -> %f"), Health);
+	// UE_LOG(LogTemp, Warning, TEXT("Damage Taken! Health -> %f"), Health);
 	if (Health <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("DEAD!!!!"));
+		// UE_LOG(LogTemp, Warning, TEXT("DEAD!!!!"));
 		ToonkTanksGameMode->ActorDied(DamagedActor);
 	}
 }

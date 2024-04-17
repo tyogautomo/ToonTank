@@ -15,7 +15,7 @@ void AToonTanksGameMode::BeginPlay()
 
 void AToonTanksGameMode::ActorDied(AActor *DeadActor)
 {
-  UE_LOG(LogTemp, Warning, TEXT("Actor Died (Game Mode)"));
+  // UE_LOG(LogTemp, Warning, TEXT("Actor Died (Game Mode)"));
   if (DeadActor == Tank)
   {
     Tank->HandleDestruction();
@@ -31,7 +31,7 @@ void AToonTanksGameMode::ActorDied(AActor *DeadActor)
   {
     DestroyedTower->HandleDestruction();
     TargetTowers--;
-    UE_LOG(LogTemp, Warning, TEXT("remaining: %i"), TargetTowers);
+    // UE_LOG(LogTemp, Warning, TEXT("remaining: %i"), TargetTowers);
     if (TargetTowers == 0)
     {
       GameOver(true);

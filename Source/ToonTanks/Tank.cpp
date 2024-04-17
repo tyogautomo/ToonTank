@@ -37,10 +37,9 @@ void ATank::Tick(float DeltaTime)
 void ATank::HandleDestruction()
 {
   Super::HandleDestruction();
-
-  // specific for tank
   SetActorHiddenInGame(true);
   SetActorTickEnabled(false);
+  bAlive = false;
 }
 
 void ATank::HandleAim()
@@ -55,17 +54,6 @@ void ATank::HandleAim()
     if (HasHit)
     {
       FVector HitPoint = HitResult.ImpactPoint;
-      // DrawDebugSphere(
-      //     GetWorld(),
-      //     HitPoint,
-      //     20,
-      //     10,
-      //     FColor::Red,
-      //     false,
-      //     -1.f,
-      //     0U,
-      //     2);
-
       RotateTurret(HitPoint);
     }
   }

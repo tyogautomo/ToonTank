@@ -19,8 +19,6 @@ void ATower::Tick(float DeltaTime)
 void ATower::HandleDestruction()
 {
   Super::HandleDestruction();
-
-  // specific for tower
   Destroy();
 }
 
@@ -35,8 +33,11 @@ void ATower::BeginPlay()
 
 void ATower::CheckFireCondition()
 {
-  const bool IsInFireRange = InFireRange();
-  if (IsInFireRange)
+  if (Tank == nullptr)
+  {
+    return;
+  }
+  if (InFireRange() && Tank->bAlive)
   {
     Fire();
   }
