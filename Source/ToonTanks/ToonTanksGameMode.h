@@ -26,6 +26,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void GameOver(bool bWonGame);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void MyBluprintFunctionWow(bool myBool, int32 myInt);
+
 private:
 	class ATank *Tank;
 	class AToonTanksPlayerController *ToonTanksPlayerController;

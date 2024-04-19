@@ -54,6 +54,7 @@ void AProjectile::OnHit(
 	AActor *MyOwner = GetOwner();
 	if (MyOwner == nullptr)
 	{
+		Destroy();
 		return;
 	}
 
@@ -76,10 +77,10 @@ void AProjectile::OnHit(
 		if (HitParticle)
 		{
 			UGameplayStatics::SpawnEmitterAtLocation(
-					GetWorld(),
+					this,
 					HitParticle,
-					Hit.Location,
-					Hit.GetActor()->GetActorRotation());
+					GetActorLocation(),
+					GetActorRotation());
 		}
 
 		if (HitCameraShakeClass)

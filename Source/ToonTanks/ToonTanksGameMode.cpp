@@ -24,6 +24,7 @@ void AToonTanksGameMode::ActorDied(AActor *DeadActor)
     {
       ToonTanksPlayerController->SetPlayerEnabledState(false);
       GameOver(false);
+      MyBluprintFunctionWow(true, 32);
     }
   }
 
